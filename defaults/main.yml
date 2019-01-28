@@ -1,0 +1,20 @@
+---
+# defaults file for cis-hardening
+
+cis_hardening_role_git_repo: https://github.com/SecurityShift/ansible-role-cis-hardening
+
+blacklisted_kernel_modules:
+  - dccp
+  - sctp
+  - usb-storage
+
+shell_timeout: 600
+
+sysctl_ip_forwarding: 0
+
+audit_privileged_commands: []
+
+fips_packages:
+  - dracut-fips
+  - prelink
+
