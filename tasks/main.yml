@@ -220,6 +220,7 @@
     owner: root
     group: root
     mode: 0750
+  when: grub_password_hash is defined
   notify:
     - update grub config
     #- update aide
