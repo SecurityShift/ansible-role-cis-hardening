@@ -349,3 +349,12 @@
     - auth
     - pam
     - security
+
+- name: Install osscap for security auditing
+  yum:
+    name: [ 'openscap-scanner', 'scap-security-guide' ]
+    state: installed
+  notify: update aide
+  tags:
+    - install
+    - security
