@@ -5,7 +5,7 @@
   file:
     name: /boot/grub2/grub.cfg
     mode: 0600
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -17,7 +17,7 @@
     regexp: "{{item}}"
     line: "install {{item}} /bin/true"
   with_items: '{{ blacklisted_kernel_modules }}'
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -31,7 +31,7 @@
     mode: 0640
   notify:
     - restart auditd
-    #- update aide
+    - update aide
   tags:
     - config
     - audit
@@ -56,7 +56,7 @@
     mode: 0600
   notify:
     - restart auditd
-    #- update aide
+    - update aide
   tags:
     - config
     - audit
@@ -69,7 +69,7 @@
     owner: root
     group: root
     mode: 0644
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -80,7 +80,7 @@
     value: 2
     state: present
     reload: yes
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -89,7 +89,7 @@
   systemd:
     name: ctrl-alt-del.target
     masked: yes
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -99,7 +99,7 @@
     name: kdump
     enabled: "{{ 'no' if not kdump_service | default(False) else 'yes' }}"
     state: "{{ 'stopped' if not kdump_service | default(False) else 'started' }}"
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -110,7 +110,7 @@
     value: 0
     state: present
     reload: yes
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -121,7 +121,7 @@
     value: 0
     state: present
     reload: yes
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -132,7 +132,7 @@
     value: '{{ sysctl_ip_forwarding }}'
     state: present
     reload: yes
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -143,7 +143,7 @@
     value: 0
     state: present
     reload: yes
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -154,7 +154,7 @@
     value: 0
     state: present
     reload: yes
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -165,7 +165,7 @@
     value: 1
     state: present
     reload: yes
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -176,7 +176,7 @@
     value: 0
     state: present
     reload: yes
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -187,7 +187,7 @@
     limit_type: hard
     limit_item: maxlogins
     value: 10
-  #notify: update aide
+  notify: update aide
   tags:
     - config
     - security
@@ -199,7 +199,7 @@
     owner: root
     group: root
     mode: 0644
-  #notify: update aide
+  notify: update aide
   tags:
     - security
     - useradd
@@ -208,7 +208,7 @@
   yum:
     name: '{{ fips_packages }}'
     state: installed
-  #notify: update aide
+  notify: update aide
   tags:
     - install
     - security
@@ -223,7 +223,7 @@
   when: grub_password_hash is defined
   notify:
     - update grub config
-    #- update aide
+    - update aide
   tags:
     - grub
     - security
@@ -236,7 +236,7 @@
   with_items:
     - system
     - password
-  #notify: update aide
+  notify: update aide
   tags:
     - auth
     - pam
@@ -248,7 +248,7 @@
     dest: "/etc/security/pwquality.conf"
     regexp: "^maxrepeat"
     line: "maxrepeat = 2"
-  #notify: update aide
+  notify: update aide
   tags:
     - auth
     - pam
@@ -260,7 +260,7 @@
     dest: "/etc/security/pwquality.conf"
     regexp: "^maxclassrepeat"
     line: "maxclassrepeat = 4"
-  #notify: update aide
+  notify: update aide
   tags:
     - auth
     - pam
@@ -272,7 +272,7 @@
     dest: "/etc/security/pwquality.conf"
     regexp: "^dcredit"
     line: "dcredit = -1"
-  #notify: update aide
+  notify: update aide
   tags:
     - auth
     - pam
@@ -284,7 +284,7 @@
     dest: "/etc/security/pwquality.conf"
     regexp: "^minlen"
     line: "minlen = 15"
-  #notify: update aide
+  notify: update aide
   tags:
     - auth
     - pam
@@ -296,7 +296,7 @@
     dest: "/etc/security/pwquality.conf"
     regexp: "^ucredit"
     line: "ucredit = -2"
-  #notify: update aide
+  notify: update aide
   tags:
     - auth
     - pam
@@ -308,7 +308,7 @@
     dest: "/etc/security/pwquality.conf"
     regexp: "^ocredit"
     line: "ocredit = -2"
-  #notify: update aide
+  notify: update aide
   tags:
     - auth
     - pam
@@ -320,7 +320,7 @@
     dest: "/etc/security/pwquality.conf"
     regexp: "^lcredit"
     line: "lcredit = -2"
-  #notify: update aide
+  notify: update aide
   tags:
     - auth
     - pam
@@ -332,7 +332,7 @@
     dest: "/etc/security/pwquality.conf"
     regexp: "^difok"
     line: "difok = 8"
-  #notify: update aide
+  notify: update aide
   tags:
     - auth
     - pam
@@ -344,7 +344,7 @@
     dest: "/etc/security/pwquality.conf"
     regexp: "^minclass"
     line: "minclass = 4"
-  #notify: update aide
+  notify: update aide
   tags:
     - auth
     - pam
